@@ -1,11 +1,11 @@
 import * as S from './styles';
-import headerPokeball from '../../assets/images/pokemonHeader.png';
+import pokemonLogo from '../../assets/images/pokemonLogo.png'
 
 export function Header() {
 
   return (
     <S.Container>
-      <S.Logo src={headerPokeball} />
+      <S.Logo src={pokemonLogo} />
     </S.Container>
   )
 }

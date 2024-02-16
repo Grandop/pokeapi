@@ -10,6 +10,8 @@ export const Container = styled.div`
   border: 1px solid ${({ theme }) => theme.colors.neutral[0]};
   gap: 8px;
   margin: 1.25rem;
+  width: 100%;
+  justify-self: center;
 `;
 
 export const NameTextField = styled.input`
