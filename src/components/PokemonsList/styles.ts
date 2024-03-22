@@ -8,6 +8,10 @@ export const Container = styled.div<{$lastPaginate?: boolean}>`
   margin: auto;
   margin-bottom: 20px;
 
+  @media (max-width: 1000px) {
+    margin-inline: 0.6rem;
+  }
+
   ${(props) => props.$lastPaginate && css`
   display: none; 
 

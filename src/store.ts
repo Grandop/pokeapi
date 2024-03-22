@@ -1,11 +1,13 @@
 import { configureStore } from '@reduxjs/toolkit'
 import { PokemonService } from './services/PokemonService/index'
-import { PaginateSlice } from './services/PokemonService/PaginateSlice/index'
+import { PaginateSlice } from './features/PaginateSlice/index'
+import { SearchSlice } from './features/SearchSlice'
 
 export const store = configureStore({
   reducer: {
     [PokemonService.reducerPath]: PokemonService.reducer,
-    paginate: PaginateSlice.reducer
+    paginate: PaginateSlice.reducer,
+    search: SearchSlice.reducer,
   },
   middleware: (getDefaultMiddleware)  =>
   getDefaultMiddleware().concat(PokemonService.middleware),
