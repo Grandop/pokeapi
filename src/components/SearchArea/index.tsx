@@ -3,9 +3,9 @@ import { Select } from '../Select';
 import { TextField } from '../TextField';
 import * as S from './styles'
 import { useGetPokemonsNamesQuery, useGetPokemonsTypesQuery } from '../../services/PokemonService';
-import { capitalizeFirstLetter } from '../../utils/capitalizeFirstLetter';
 import { useDispatch,  } from 'react-redux';
 import { updateNamesData } from '../../features/SearchSlice';
+import { capitalizeFirstLetter } from '../../utils/capitalizeFirstLetter';
 
 export const SearchArea = () => {
   const [ pokemonTypes, setPokemonTypes ] = useState<string[] | undefined>()
@@ -21,11 +21,14 @@ export const SearchArea = () => {
   }, [data])
 
   const searchPokemonByName = (text: string) => {
-    const names = namesData?.results.map(item => item.name)
-    const filteredNames = names?.filter((item) => {
-      return item.includes(text.toLowerCase())
-    } )
-    console.log({filteredNames})
+    const filteredNames = namesData?.results
+      .filter(item => item.name.toLowerCase().includes(text.toLowerCase()))
+      .map(item => {
+        return {
+          name: item.name,
+          id: item.url.split("/")[6]
+        };
+      });
     dispatch(updateNamesData(filteredNames || []));
   } 
   

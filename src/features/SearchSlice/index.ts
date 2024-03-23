@@ -1,21 +1,30 @@
 import { PayloadAction, createSlice } from '@reduxjs/toolkit';
 
+export type PokemonObject = {
+  name: string;
+  id: string;
+}[]
 
 export type SearchState = {
   searchText: string;
-  filteredNames: string[];
+  filteredNames: PokemonObject;
 }
 
 const initialState: SearchState = {
   searchText: '',
-  filteredNames: [],
+  filteredNames: [
+    {
+      name: '',
+      id: ''
+    }
+  ],
 }
 
 export const SearchSlice = createSlice({
   name: 'search',
   initialState,
   reducers: {
-    updateNamesData: (state, action: PayloadAction<string[]>) => {
+    updateNamesData: (state, action: PayloadAction<PokemonObject>) => {
       state.filteredNames = action.payload
     }
   }

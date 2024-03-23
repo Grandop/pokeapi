@@ -19,21 +19,20 @@ export const PokemonsList = () => {
   const firstPage = 0
   const lastPage = 162
 
-  console.log({filteredNames})
-  if(filteredNames.length === 0 ) {
-    console.log('nao tem nada sendo pesquisado')
-  } else {
-    console.log('sendo pesquisado')
-  }
-
   const getId = (urls: string[] | []) => {
     return urls.map((url) => url.split("/")[6])
   }
 
   useEffect(() => {
-    const urls = data?.results.map(item => item.url) || []
-    setPokeIds(getId(urls))
-  }, [data])
+    if(filteredNames.filter(item => item.id === '' && item.name === '').length > 0) {
+      const urls = data?.results.map(item => item.url) || []
+      setPokeIds(getId(urls))
+    } else {
+      const id = filteredNames?.map(item => item.id) || []
+      setPokeIds(id)
+    }
+  }, [data, filteredNames])
+
 
   const backPage =  () => {
     dispatch(previousPage())
@@ -56,13 +55,13 @@ export const PokemonsList = () => {
       </S.Container>
 
       <S.PokemonsContainer>
-        {filteredNames.length === 0 || filteredNames.length === 1302 ? (
+        {filteredNames.filter(item => item.id === '' && item.name === '').length > 0 ? (
           data?.results.map((item, index) => (
             <PokemonCard key={index} isLoading={isLoading} id={pokeIds?.[index]} {...item} />
           ))
         ) : (
           filteredNames.map((name, index) => (
-            <PokemonCard key={index} isLoading={isLoading} id={pokeIds?.[index]} name={name} />
+            <PokemonCard key={index} isLoading={isLoading} id={pokeIds?.[index]} name={name.name} />
           ))
         )}
       </S.PokemonsContainer>

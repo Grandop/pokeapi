@@ -1,6 +1,6 @@
 import * as S from './styles';
-import { capitalizeFirstLetter } from '../../utils/capitalizeFirstLetter';
 import Loader from '../Loader';
+import { capitalizeFirstLetter } from '../../utils/capitalizeFirstLetter';
 
 type PokemonCardProps = {
   id: string | undefined;
