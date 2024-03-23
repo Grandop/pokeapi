@@ -9,13 +9,13 @@ import { nextPage, previousPage } from "../../features/PaginateSlice"
 import { IconButton } from '../IconButton';
 import { IoChevronBack, IoChevronForward } from "react-icons/io5";
 
-
 export const PokemonsList = () => {
+  const [ pokeIds, setPokeIds ] = useState<string[]>()
   const page = useSelector((state: RootState) => state.paginate.value)
   const { data, isLoading } = useGetPokemonsNamesQuery({ limit: 8, offset: page })
   const filteredNames = useSelector((state: RootState) => state.search.filteredNames);
+  const IsNotSearch = filteredNames.filter(item => item.id === '' && item.name === '').length > 0
   const dispatch = useDispatch()
-  const [ pokeIds, setPokeIds ] = useState<string[]>()
   const firstPage = 0
   const lastPage = 162
 
@@ -24,15 +24,14 @@ export const PokemonsList = () => {
   }
 
   useEffect(() => {
-    if(filteredNames.filter(item => item.id === '' && item.name === '').length > 0) {
+    if(IsNotSearch || filteredNames.length === 1302) {
       const urls = data?.results.map(item => item.url) || []
       setPokeIds(getId(urls))
     } else {
       const id = filteredNames?.map(item => item.id) || []
       setPokeIds(id)
     }
-  }, [data, filteredNames])
-
+  }, [data, filteredNames, IsNotSearch])
 
   const backPage =  () => {
     dispatch(previousPage())
@@ -55,7 +54,7 @@ export const PokemonsList = () => {
       </S.Container>
 
       <S.PokemonsContainer>
-        {filteredNames.filter(item => item.id === '' && item.name === '').length > 0 ? (
+        {IsNotSearch || filteredNames.length === 1302 ? (
           data?.results.map((item, index) => (
             <PokemonCard key={index} isLoading={isLoading} id={pokeIds?.[index]} {...item} />
           ))
