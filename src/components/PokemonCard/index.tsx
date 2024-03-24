@@ -1,27 +1,24 @@
-import * as S from './styles';
-import Loader from '../Loader';
-import { capitalizeFirstLetter } from '../../utils/capitalizeFirstLetter';
+import * as S from "./styles";
+import Loader from "../Loader";
+import { capitalizeFirstLetter } from "../../utils/capitalizeFirstLetter";
 
 type PokemonCardProps = {
-  id: string | undefined;
   name: string;
+  id: string;
   isLoading: boolean;
-}
+};
 
-export const PokemonCard = ({ id, name, isLoading }: PokemonCardProps) => {
-  const pokemonUrlImage = 'https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/'
-  const pokemonPhoto = `${pokemonUrlImage}${id}.png`
+export const PokemonCard = ({ name, isLoading, id }: PokemonCardProps) => {
+  const pokemonUrlImage =
+    "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/";
+  const pokemonPhoto = `${pokemonUrlImage}${id}.png`;
 
-  return(
+  return (
     <S.Container>
-      {!isLoading ? (
-        <S.PokemonImage src={pokemonPhoto} />
-      ) : (
-        <Loader/>
-      )}
+      {!isLoading ? <S.PokemonImage src={pokemonPhoto} /> : <Loader />}
       <S.PokemonInfo>
         <S.PokemoName>{capitalizeFirstLetter(name)}</S.PokemoName>
       </S.PokemonInfo>
     </S.Container>
   );
-}
+};

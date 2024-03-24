@@ -1,27 +1,20 @@
-import { useEffect, useState } from "react";
+import { useDispatch } from "react-redux";
+
 import {
   useGetPokemonsNamesQuery,
   useGetPokemonsTypesQuery
 } from "../../../store/services/pokemon";
-import { useDispatch } from "react-redux";
-import { capitalizeFirstLetter } from "../../../utils/capitalizeFirstLetter";
 import { updateNamesData } from "../../../store/slices/search";
 
+const ALL_POKEMONS = 100000;
+
 export const useSearchArea = () => {
-  const [pokemonTypes, setPokemonTypes] = useState<string[] | undefined>();
+  const dispatch = useDispatch();
   const { data } = useGetPokemonsTypesQuery();
   const { data: namesData } = useGetPokemonsNamesQuery({
-    limit: 100000,
+    limit: ALL_POKEMONS,
     offset: 0
   });
-  const dispatch = useDispatch();
-
-  useEffect(() => {
-    const types = data?.results.map((data) => {
-      return capitalizeFirstLetter(data.name);
-    });
-    setPokemonTypes(types);
-  }, [data]);
 
   const searchPokemonByName = (text: string) => {
     const filteredNames = namesData?.results
@@ -29,7 +22,7 @@ export const useSearchArea = () => {
       .map((item) => {
         return {
           name: item.name,
-          id: item.url.split("/")[6]
+          url: item.url
         };
       });
     dispatch(updateNamesData(filteredNames || []));
@@ -37,6 +30,6 @@ export const useSearchArea = () => {
 
   return {
     searchPokemonByName,
-    pokemonTypes
+    pokemonTypes: data?.results.map((item) => item.name)
   };
 };

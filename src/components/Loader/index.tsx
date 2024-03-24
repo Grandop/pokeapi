@@ -1,9 +1,7 @@
-import * as S from './styles';
+import * as S from "./styles";
 
 function Loader() {
-  return (
-    <S.LoaderIcon/>
-  );
+  return <S.LoaderIcon />;
 }
 
 export default Loader;

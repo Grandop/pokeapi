@@ -9,8 +9,8 @@ export const capitalizeFirstLetter = (string: string): string => {
     return string;
   }
 
-  const firstLetter = string[firstLetterIndex].toUpperCase(); 
+  const firstLetter = string[firstLetterIndex].toUpperCase();
   const restOfString = string.slice(firstLetterIndex + 1);
 
-  return firstLetter + restOfString; 
-}
+  return firstLetter + restOfString;
+};

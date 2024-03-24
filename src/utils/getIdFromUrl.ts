@@ -1,3 +1,3 @@
-export const getIdFromUrl = (urls: string[] | []) => {
-  return urls.map((url) => url.split("/")[6])
-}
+export const getIdFromUrl = (url: string) => {
+  return url.split("/")[6];
+};

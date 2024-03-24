@@ -1,56 +1,80 @@
-import { PokemonCard } from '../PokemonCard';
-import * as S from './styles'
-import { IconButton } from '../IconButton';
+import { PokemonCard } from "../PokemonCard";
+import * as S from "./styles";
+import { IconButton } from "../IconButton";
 import { IoChevronBack, IoChevronForward } from "react-icons/io5";
-import { usePokemonList } from './hooks/usePokemonList'
+import { usePokemonList } from "./hooks/usePokemonList";
+import { getIdFromUrl } from "../../utils/getIdFromUrl";
 
 export const PokemonsList = () => {
-  const { 
-    advancePage, 
-    backPage, 
-    data, 
+  const {
+    advancePage,
+    backPage,
+    data,
     filteredNames,
-    firstPage,
+    FIRST_PAGE,
+    LAST_PAGE,
     isLoading,
-    lastPage,
     page,
-    pokeIds,
-    IsNotSearch
+    thereAreFilteredNames
   } = usePokemonList();
 
-  return(
+  return (
     <>
       <S.Container>
-        {page / 20 > firstPage ? (
-          <IconButton iconColor='white' icon={IoChevronBack} onClick={() => backPage()} />
-        ): null}
+        {page / 20 > FIRST_PAGE ? (
+          <IconButton
+            iconColor="white"
+            icon={IoChevronBack}
+            onClick={() => backPage()}
+          />
+        ) : null}
         <h2>Page: {page / 20 + 1}</h2>
-        {page / 20 < lastPage  ? (
-          <IconButton iconColor='white' icon={IoChevronForward} onClick={() => advancePage()} />
-        ): null}
+        {page / 20 < LAST_PAGE ? (
+          <IconButton
+            iconColor="white"
+            icon={IoChevronForward}
+            onClick={() => advancePage()}
+          />
+        ) : null}
       </S.Container>
 
       <S.PokemonsContainer>
-        {IsNotSearch || filteredNames.length === 1302 ? (
-          data?.results.map((item, index) => (
-            <PokemonCard key={index} isLoading={isLoading} id={pokeIds?.[index]} {...item} />
-          ))
-        ) : (
-          filteredNames.map((name, index) => (
-            <PokemonCard key={index} isLoading={isLoading} id={pokeIds?.[index]} name={name.name} />
-          ))
-        )}
+        {thereAreFilteredNames
+          ? filteredNames.map((option, index) => (
+              <PokemonCard
+                key={index}
+                isLoading={isLoading}
+                id={getIdFromUrl(option.url)}
+                name={option.name}
+              />
+            ))
+          : data?.results.map((option, index) => (
+              <PokemonCard
+                key={index}
+                isLoading={isLoading}
+                id={getIdFromUrl(option.url)}
+                name={option.name}
+              />
+            ))}
       </S.PokemonsContainer>
 
       <S.Container>
-        {page / 20 > firstPage ? (
-          <IconButton iconColor='white' icon={IoChevronBack} onClick={() => backPage()} />
-        ): null}
+        {page / 20 > FIRST_PAGE ? (
+          <IconButton
+            iconColor="white"
+            icon={IoChevronBack}
+            onClick={() => backPage()}
+          />
+        ) : null}
         <h2>Page: {page / 20 + 1}</h2>
-        {page / 20 < lastPage  ? (
-          <IconButton iconColor='white' icon={IoChevronForward} onClick={() => advancePage()} />
-        ): null}
+        {page / 20 < LAST_PAGE ? (
+          <IconButton
+            iconColor="white"
+            icon={IoChevronForward}
+            onClick={() => advancePage()}
+          />
+        ) : null}
       </S.Container>
     </>
   );
-}
+};
