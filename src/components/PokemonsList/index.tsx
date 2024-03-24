@@ -57,24 +57,6 @@ export const PokemonsList = () => {
               />
             ))}
       </S.PokemonsContainer>
-
-      <S.Container>
-        {page / 20 > FIRST_PAGE ? (
-          <IconButton
-            iconColor="white"
-            icon={IoChevronBack}
-            onClick={() => backPage()}
-          />
-        ) : null}
-        <h2>Page: {page / 20 + 1}</h2>
-        {page / 20 < LAST_PAGE ? (
-          <IconButton
-            iconColor="white"
-            icon={IoChevronForward}
-            onClick={() => advancePage()}
-          />
-        ) : null}
-      </S.Container>
     </>
   );
 };

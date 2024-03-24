@@ -7,27 +7,28 @@ export const Container = styled.div`
   display: flex;
   flex-direction: column;
   cursor: pointer;
-  margin: 0 auto;
   position: relative;
   border-radius: 10px;
-  border: 1px solid;
+  padding: 10px;
+  transition: box-shadow 0.4s ease;
 
   &:hover {
-    box-shadow: 0 2px 10px ${({ theme }) => theme.colors.blue};
+    box-shadow: 0 2px 10px ${({ theme }) => theme.colors.neutral[400]};
   }
 `;
 
 export const PokemonImage = styled.img`
   width: 100%;
-  border-radius: 10px;
+  border-radius: 8px;
+  background-color: ${({ theme }) => theme.colors.neutral[700]};
 `;
 
 export const PokemonInfo = styled.div`
   display: flex;
-  justify-content: center;
-  align-items: center;
-  padding: 20px;
-  border-top: 1px solid #ddd;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: flex-start;
+  padding-bottom: 20px;
 `;
 
 export const PokemoName = styled.h2`
@@ -35,6 +36,19 @@ export const PokemoName = styled.h2`
   font-weight: 400;
   display: block;
   margin-bottom: 10px;
-  font-family: 'Montserrat', sans-serif;
+  font-family: "Montserrat", sans-serif;
   color: ${({ theme }) => theme.colors.neutral[0]};
+`;
+
+export const TypesContainer = styled.div`
+  display: flex;
+  flex-direction: row;
+  gap: 15px;
+`;
+
+export const TypeName = styled.h5`
+  background-color: lightsalmon;
+  padding: 8px;
+  color: #000;
+  border-radius: 20px;
 `;

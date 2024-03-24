@@ -15,7 +15,8 @@ export const usePokemonList = () => {
   );
   const FIRST_PAGE = 0;
   const LAST_PAGE = 162;
-  const thereAreFilteredNames = filteredNames.length >= 1;
+  const thereAreFilteredNames =
+    filteredNames.length >= 1 && filteredNames.length < 1302;
 
   const backPage = () => {
     dispatch(previousPage());
