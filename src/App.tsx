@@ -4,7 +4,7 @@ import { theme } from './themes/theme'
 import { Header } from './components/Header'
 import { AppRoutes } from './routes'
 import { Provider } from 'react-redux';
-import { store } from './store';
+import { store } from './store/config'
 
 function App() {
 

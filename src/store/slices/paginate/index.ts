@@ -9,10 +9,10 @@ export const PaginateSlice = createSlice({
   initialState,
   reducers: {
     nextPage: (state) => {
-      state.value += 8
+      state.value += 20
     },
     previousPage: (state) => {
-      state.value -= 8
+      state.value -= 20
     }
   }
 })

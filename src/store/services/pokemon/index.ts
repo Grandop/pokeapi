@@ -1,5 +1,5 @@
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
-import { PokemonResults } from "../../types";
+import { PokemonResults } from "../../../types";
 
 type GetPokemonsNameParams = {
   limit: number;
@@ -7,8 +7,8 @@ type GetPokemonsNameParams = {
 }
 
 export const PokemonService = createApi({
-  reducerPath: 'pokemonApi',
-  baseQuery: fetchBaseQuery({ baseUrl: 'https://pokeapi.co/api/v2/' }),
+  reducerPath: 'pokemon',
+  baseQuery: fetchBaseQuery({ baseUrl: "https://pokeapi.co/api/v2/" }),
   endpoints: (builder) => ({
     getPokemonsTypes: builder.query<PokemonResults, void>({
       query: () => ({

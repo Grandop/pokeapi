@@ -1,6 +1,6 @@
-import { styled, css } from "styled-components";
+import { styled } from "styled-components";
 
-export const Container = styled.div<{$lastPaginate?: boolean}>`
+export const Container = styled.div`
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -12,16 +12,12 @@ export const Container = styled.div<{$lastPaginate?: boolean}>`
     margin-inline: 0.6rem;
   }
 
-  ${(props) => props.$lastPaginate && css`
-  display: none; 
-
   @media (max-width: 900px) {
     display: flex;
     justify-content: space-between;
     align-items: center;
     padding: 10px;
   }
-  `}
 `;
 
 export const PokemonsContainer = styled.div`
@@ -33,5 +29,3 @@ export const PokemonsContainer = styled.div`
   margin-inline: auto;
   position: relative;
 `;
-
-export const PageCount = styled.h2``;
