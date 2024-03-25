@@ -9,12 +9,14 @@ export type SearchState = {
   searchText: string;
   filteredNames: PokemonObject;
   typedPokemons: PokemonObject;
+  searchType: string | undefined;
 };
 
 const initialState: SearchState = {
   searchText: "",
   filteredNames: [],
-  typedPokemons: []
+  typedPokemons: [],
+  searchType: ""
 };
 
 export const SearchSlice = createSlice({
@@ -26,8 +28,12 @@ export const SearchSlice = createSlice({
     },
     updateTypedPokemon: (state, action: PayloadAction<PokemonObject>) => {
       state.typedPokemons = action.payload;
+    },
+    updateSearchType: (state, action: PayloadAction<string | undefined>) => {
+      state.searchType = action.payload;
     }
   }
 });
 
-export const { updateNamesData, updateTypedPokemon } = SearchSlice.actions;
+export const { updateNamesData, updateTypedPokemon, updateSearchType } =
+  SearchSlice.actions;

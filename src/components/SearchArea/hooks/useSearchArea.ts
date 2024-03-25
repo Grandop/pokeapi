@@ -7,6 +7,7 @@ import {
 } from "../../../store/services/pokemon";
 import {
   updateNamesData,
+  updateSearchType,
   updateTypedPokemon
 } from "../../../store/slices/search";
 import { useEffect, useState } from "react";
@@ -43,35 +44,38 @@ export const useSearchArea = () => {
   };
 
   const filterPokemonByType = (label: string | undefined) => {
-    if (label) {
-      setTypeName(label === undefined ? "" : label.toLowerCase());
-    }
+    setTypeName(label?.toLowerCase());
   };
 
   useEffect(() => {
-    if (filterType) {
-      if (
-        filteredNames.length >= 1 &&
-        filterType?.pokemon?.length >= 1 &&
-        filteredNames.length !== 1302
-      ) {
-        const commonElements = filteredNames?.filter((item) =>
-          filterType?.pokemon.some(
-            (pokemon) => pokemon.pokemon.name === item.name
-          )
-        );
-        dispatch(updateTypedPokemon(commonElements));
-      } else {
-        const typeSearched = filterType?.pokemon?.map((p) => {
-          return {
-            name: p.pokemon.name,
-            url: p.pokemon.url
-          };
-        });
-        dispatch(updateTypedPokemon(typeSearched));
-      }
-    }
-  }, [filterType, filteredNames]);
+    const applyTypeFilter = () => {
+      if (!filterType || typeName === undefined) return;
+
+      dispatch(updateSearchType(typeName));
+
+      const pokemonOfType =
+        filterType.pokemon?.map((p) => ({
+          name: p.pokemon.name,
+          url: p.pokemon.url
+        })) ?? [];
+
+      const commonElements = filteredNames.filter((item) =>
+        pokemonOfType.some((pokemon) => pokemon.name === item.name)
+      );
+
+      dispatch(updateTypedPokemon(commonElements));
+    };
+
+    const applyAllPokemonFilter = () => {
+      if (typeName !== undefined) return;
+
+      dispatch(updateSearchType(typeName));
+      dispatch(updateTypedPokemon(filteredNames));
+    };
+
+    applyTypeFilter();
+    applyAllPokemonFilter();
+  }, [filterType, filteredNames, typeName]);
 
   return {
     searchPokemonByName,
