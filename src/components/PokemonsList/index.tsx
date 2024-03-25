@@ -15,7 +15,8 @@ export const PokemonsList = () => {
     LAST_PAGE,
     isLoading,
     page,
-    thereAreFilteredNames
+    thereAreFilteredNames,
+    currentPage
   } = usePokemonList();
 
   return (
@@ -40,14 +41,16 @@ export const PokemonsList = () => {
 
       <S.PokemonsContainer>
         {thereAreFilteredNames
-          ? filteredNames.map((option, index) => (
-              <PokemonCard
-                key={index}
-                isLoading={isLoading}
-                id={getIdFromUrl(option.url)}
-                name={option.name}
-              />
-            ))
+          ? filteredNames
+              .slice(currentPage * 20, 20 * (currentPage + 1))
+              .map((option, index) => (
+                <PokemonCard
+                  key={index}
+                  isLoading={isLoading}
+                  id={getIdFromUrl(option.url)}
+                  name={option.name}
+                />
+              ))
           : data?.results.map((option, index) => (
               <PokemonCard
                 key={index}

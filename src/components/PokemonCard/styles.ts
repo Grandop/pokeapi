@@ -35,6 +35,7 @@ export const PokemoName = styled.h2`
   font-size: 25px;
   font-weight: 400;
   display: block;
+  margin-top: 10px;
   margin-bottom: 10px;
   font-family: "Montserrat", sans-serif;
   color: ${({ theme }) => theme.colors.neutral[0]};
@@ -44,11 +45,18 @@ export const TypesContainer = styled.div`
   display: flex;
   flex-direction: row;
   gap: 15px;
+  width: 100%;
+`;
+
+export const TypeNameContainer = styled.div`
+  background-color: lightsalmon;
+  padding: 8px;
+  border-radius: 20px;
+  width: 100%;
 `;
 
 export const TypeName = styled.h5`
-  background-color: lightsalmon;
-  padding: 8px;
+  display: flex;
   color: #000;
-  border-radius: 20px;
+  justify-content: center;
 `;

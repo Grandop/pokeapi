@@ -1,5 +1,5 @@
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
-import { PokemonResults, PokemonDetailResults } from "../../../types";
+import { PokemonResults, PokemonDetailResults } from "./types";
 
 type GetPokemonsNameParams = {
   limit?: number;
@@ -13,14 +13,12 @@ export const PokemonService = createApi({
   endpoints: (builder) => ({
     getPokemonsTypes: builder.query<PokemonResults, void>({
       query: () => ({
-        url: "type",
-        method: "GET"
+        url: "type"
       })
     }),
     getPokemonsNames: builder.query<PokemonResults, GetPokemonsNameParams>({
       query: ({ limit, offset }) => ({
-        url: `pokemon?limit=${limit}&offset=${offset}`,
-        method: "GET"
+        url: `pokemon?limit=${limit}&offset=${offset}`
       })
     }),
     getPokemonDetail: builder.query<
@@ -28,8 +26,7 @@ export const PokemonService = createApi({
       GetPokemonsNameParams
     >({
       query: ({ id }) => ({
-        url: `pokemon/${id}/`,
-        method: "GET"
+        url: `pokemon/${id}`
       })
     })
   })

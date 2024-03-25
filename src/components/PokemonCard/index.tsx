@@ -1,7 +1,8 @@
 import * as S from "./styles";
 import Loader from "../Loader";
 import { capitalizeFirstLetter } from "../../utils/capitalizeFirstLetter";
-import { useGetPokemonDetailQuery } from "../../store/services/pokemon";
+import { useNavigate } from "react-router-dom";
+import { RoutesPaths } from "../../routes/RoutesPaths";
 
 type PokemonCardProps = {
   name: string;
@@ -10,21 +11,20 @@ type PokemonCardProps = {
 };
 
 export const PokemonCard = ({ name, isLoading, id }: PokemonCardProps) => {
-  const { data: pokemonDetailData } = useGetPokemonDetailQuery({ id });
+  const navigate = useNavigate();
   const pokemonUrlImage =
     "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/";
   const pokemonPhoto = `${pokemonUrlImage}${id}.png`;
 
+  const navigateToDetailPokemon = () => {
+    navigate(RoutesPaths.pokemonDetail());
+  };
+
   return (
-    <S.Container>
+    <S.Container key={id} onClick={navigateToDetailPokemon}>
       {!isLoading ? <S.PokemonImage src={pokemonPhoto} /> : <Loader />}
       <S.PokemonInfo>
         <S.PokemoName>{capitalizeFirstLetter(name)}</S.PokemoName>
-        <S.TypesContainer>
-          {pokemonDetailData?.types.map((option) => (
-            <S.TypeName>{capitalizeFirstLetter(option.type.name)}</S.TypeName>
-          ))}
-        </S.TypesContainer>
       </S.PokemonInfo>
     </S.Container>
   );

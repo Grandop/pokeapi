@@ -1,3 +1,4 @@
 export const RoutesPaths = {
-  home: () => '/',
-}
+  home: () => "/",
+  pokemonDetail: () => "/pokemon"
+};

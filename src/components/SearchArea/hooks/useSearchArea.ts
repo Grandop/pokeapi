@@ -6,18 +6,16 @@ import {
 } from "../../../store/services/pokemon";
 import { updateNamesData } from "../../../store/slices/search";
 
-const ALL_POKEMONS = 100000;
-
 export const useSearchArea = () => {
   const dispatch = useDispatch();
   const { data } = useGetPokemonsTypesQuery();
-  const { data: namesData } = useGetPokemonsNamesQuery({
-    limit: ALL_POKEMONS,
+  const { data: pokemons } = useGetPokemonsNamesQuery({
+    limit: 100000,
     offset: 0
   });
 
   const searchPokemonByName = (text: string) => {
-    const filteredNames = namesData?.results
+    const filteredNames = pokemons?.results
       .filter((item) => item.name.toLowerCase().includes(text.toLowerCase()))
       .map((item) => {
         return {
