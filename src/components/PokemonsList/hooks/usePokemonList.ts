@@ -13,6 +13,9 @@ export const usePokemonList = () => {
   const filteredNames = useSelector(
     (state: RootState) => state.search.filteredNames
   );
+  const typedPokemons = useSelector(
+    (state: RootState) => state.search.typedPokemons
+  );
   const FIRST_PAGE = 0;
   const LAST_PAGE = 162;
   const currentPage = page / 20;
@@ -37,6 +40,7 @@ export const usePokemonList = () => {
     LAST_PAGE,
     thereAreFilteredNames,
     isLoading,
-    currentPage
+    currentPage,
+    typedPokemons
   };
 };

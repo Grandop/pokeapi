@@ -1,10 +1,11 @@
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 import { PokemonResults, PokemonDetailResults } from "./types";
 
-type GetPokemonsNameParams = {
+type GetPokemonsParams = {
   limit?: number;
   offset?: number;
   id?: string;
+  typeName?: string;
 };
 
 export const PokemonService = createApi({
@@ -16,17 +17,19 @@ export const PokemonService = createApi({
         url: "type"
       })
     }),
-    getPokemonsNames: builder.query<PokemonResults, GetPokemonsNameParams>({
+    getPokemonsNames: builder.query<PokemonResults, GetPokemonsParams>({
       query: ({ limit, offset }) => ({
         url: `pokemon?limit=${limit}&offset=${offset}`
       })
     }),
-    getPokemonDetail: builder.query<
-      PokemonDetailResults,
-      GetPokemonsNameParams
-    >({
+    getPokemonDetail: builder.query<PokemonDetailResults, GetPokemonsParams>({
       query: ({ id }) => ({
         url: `pokemon/${id}`
+      })
+    }),
+    getPokemonsTypeDetail: builder.query<PokemonResults, GetPokemonsParams>({
+      query: ({ typeName }) => ({
+        url: `type/${typeName}`
       })
     })
   })
@@ -35,5 +38,6 @@ export const PokemonService = createApi({
 export const {
   useGetPokemonsTypesQuery,
   useGetPokemonsNamesQuery,
-  useGetPokemonDetailQuery
+  useGetPokemonDetailQuery,
+  useGetPokemonsTypeDetailQuery
 } = PokemonService;

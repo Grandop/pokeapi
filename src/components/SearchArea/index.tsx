@@ -4,7 +4,8 @@ import * as S from "./styles";
 import { useSearchArea } from "./hooks/useSearchArea";
 
 export const SearchArea = () => {
-  const { searchPokemonByName, pokemonTypes } = useSearchArea();
+  const { searchPokemonByName, pokemonTypes, filterPokemonByType } =
+    useSearchArea();
 
   return (
     <>
@@ -13,7 +14,10 @@ export const SearchArea = () => {
           onChange={(e) => searchPokemonByName(e.target.value)}
           placeholder="Digite o nome do pokemon"
         />
-        <Select options={pokemonTypes || []} />
+        <Select
+          options={pokemonTypes || []}
+          onChange={(e) => filterPokemonByType(e?.label)}
+        />
       </S.InputArea>
     </>
   );

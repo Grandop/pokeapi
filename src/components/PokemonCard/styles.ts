@@ -26,8 +26,8 @@ export const PokemonImage = styled.img`
 export const PokemonInfo = styled.div`
   display: flex;
   flex-direction: column;
-  justify-content: flex-start;
-  align-items: flex-start;
+  justify-content: center;
+  align-items: center;
   padding-bottom: 20px;
 `;
 
@@ -36,27 +36,7 @@ export const PokemoName = styled.h2`
   font-weight: 400;
   display: block;
   margin-top: 10px;
-  margin-bottom: 10px;
+  /* margin-bottom: 10px; */
   font-family: "Montserrat", sans-serif;
   color: ${({ theme }) => theme.colors.neutral[0]};
-`;
-
-export const TypesContainer = styled.div`
-  display: flex;
-  flex-direction: row;
-  gap: 15px;
-  width: 100%;
-`;
-
-export const TypeNameContainer = styled.div`
-  background-color: lightsalmon;
-  padding: 8px;
-  border-radius: 20px;
-  width: 100%;
-`;
-
-export const TypeName = styled.h5`
-  display: flex;
-  color: #000;
-  justify-content: center;
 `;

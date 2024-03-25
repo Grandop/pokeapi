@@ -1,5 +1,10 @@
 export type PokemonResults = {
   results: Pokemon[];
+  pokemon: PokemonType[];
+};
+
+export type PokemonType = {
+  pokemon: Pokemon;
 };
 
 export type Pokemon = {
