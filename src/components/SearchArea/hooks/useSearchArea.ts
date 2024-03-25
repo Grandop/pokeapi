@@ -48,33 +48,32 @@ export const useSearchArea = () => {
   };
 
   useEffect(() => {
-    const applyTypeFilter = () => {
-      if (!filterType || typeName === undefined) return;
-
+    if (filterType && typeName !== undefined) {
       dispatch(updateSearchType(typeName));
-
-      const pokemonOfType =
-        filterType.pokemon?.map((p) => ({
-          name: p.pokemon.name,
-          url: p.pokemon.url
-        })) ?? [];
-
-      const commonElements = filteredNames.filter((item) =>
-        pokemonOfType.some((pokemon) => pokemon.name === item.name)
-      );
-
-      dispatch(updateTypedPokemon(commonElements));
-    };
-
-    const applyAllPokemonFilter = () => {
-      if (typeName !== undefined) return;
-
+      if (
+        filteredNames.length >= 1 &&
+        filterType?.pokemon?.length >= 1 &&
+        filteredNames.length !== 1302
+      ) {
+        const commonElements = filteredNames?.filter((item) =>
+          filterType?.pokemon.some(
+            (pokemon) => pokemon.pokemon.name === item.name
+          )
+        );
+        dispatch(updateTypedPokemon(commonElements));
+      } else {
+        const typeSearched = filterType?.pokemon?.map((p) => {
+          return {
+            name: p.pokemon.name,
+            url: p.pokemon.url
+          };
+        });
+        dispatch(updateTypedPokemon(typeSearched));
+      }
+    } else if (typeName === undefined) {
       dispatch(updateSearchType(typeName));
       dispatch(updateTypedPokemon(filteredNames));
-    };
-
-    applyTypeFilter();
-    applyAllPokemonFilter();
+    }
   }, [filterType, filteredNames, typeName]);
 
   return {

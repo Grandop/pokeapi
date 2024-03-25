@@ -17,7 +17,7 @@ export const usePokemonList = () => {
     (state: RootState) => state.search.typedPokemons
   );
   const FIRST_PAGE = 0;
-  const LAST_PAGE = 162;
+  const LAST_PAGE = 65;
   const currentPage = page / 20;
   const thereAreFilteredNames =
     filteredNames.length >= 1 && filteredNames.length < 1302;
