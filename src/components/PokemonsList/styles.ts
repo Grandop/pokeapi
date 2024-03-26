@@ -29,3 +29,24 @@ export const PokemonsContainer = styled.div`
   margin-inline: auto;
   position: relative;
 `;
+
+export const EmptyState = styled.div`
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+  padding: 10px;
+`;
+
+export const EmptyStateTitle = styled.h2`
+  @media (max-width: 500px) {
+    font-size: medium;
+  }
+`;
+
+export const EmptyStateMessage = styled.p`
+  @media (max-width) {
+    font-size: small;
+  }
+`;

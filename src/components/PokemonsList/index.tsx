@@ -31,7 +31,9 @@ export const PokemonsList = () => {
           />
         ) : null}
         <h2>Page: {page / 20 + 1}</h2>
-        {page / 20 < LAST_PAGE ? (
+        {page / 20 < LAST_PAGE &&
+        typedPokemons.slice(currentPage * 20, 20 * (currentPage + 1)).length >
+          0 ? (
           <IconButton
             iconColor="white"
             icon={IoChevronForward}
@@ -75,6 +77,17 @@ export const PokemonsList = () => {
               />
             )))}
       </S.PokemonsContainer>
+      {typedPokemons.slice(currentPage * 20, 20 * (currentPage + 1)).length ===
+        0 && (
+        <S.EmptyState>
+          <S.EmptyStateTitle>
+            Nenhum Pokémon encontrado nesta página
+          </S.EmptyStateTitle>
+          <S.EmptyStateMessage>
+            Insira outro termo de pesquisa ou retroceda de página
+          </S.EmptyStateMessage>
+        </S.EmptyState>
+      )}
     </>
   );
 };
