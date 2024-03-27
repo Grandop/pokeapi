@@ -13,11 +13,21 @@ export type Pokemon = {
 };
 
 export type PokemonDetailResults = {
+  height: number;
   types: PokemonDetail[];
+  stats: PokemonStat[];
+  weight: number;
 };
 
 export type PokemonDetail = {
   type: {
+    name: string;
+  };
+};
+
+export type PokemonStat = {
+  base_stat: number;
+  stat: {
     name: string;
   };
 };
