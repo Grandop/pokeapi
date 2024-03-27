@@ -51,6 +51,7 @@ export const useSearchArea = () => {
 
   const filterPokemonByType = (label: string | undefined) => {
     setTypeName(label?.toLowerCase());
+    dispatch(turnBackToInitialPage());
   };
 
   useEffect(() => {
