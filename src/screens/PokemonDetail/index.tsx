@@ -1,4 +1,3 @@
-import { Divider } from "../../components/Divider";
 import { BaseStatsDetail } from "./components/BaseStatsDetail";
 import { BasicInfoDetail } from "./components/BasicInfoDetail";
 import { PokemonHeaderDetail } from "./components/HeaderDetail";

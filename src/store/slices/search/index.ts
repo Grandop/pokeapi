@@ -31,9 +31,16 @@ export const SearchSlice = createSlice({
     },
     updateSearchType: (state, action: PayloadAction<string | undefined>) => {
       state.searchType = action.payload;
+    },
+    updateSearchText: (state, action: PayloadAction<string>) => {
+      state.searchText = action.payload;
     }
   }
 });
 
-export const { updateNamesData, updateTypedPokemon, updateSearchType } =
-  SearchSlice.actions;
+export const {
+  updateNamesData,
+  updateTypedPokemon,
+  updateSearchType,
+  updateSearchText
+} = SearchSlice.actions;

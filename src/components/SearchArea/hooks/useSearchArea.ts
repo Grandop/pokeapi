@@ -7,6 +7,7 @@ import {
 } from "../../../store/services/pokemon";
 import {
   updateNamesData,
+  updateSearchText,
   updateSearchType,
   updateTypedPokemon
 } from "../../../store/slices/search";
@@ -31,7 +32,10 @@ export const useSearchArea = () => {
     (state: RootState) => state.search.filteredNames
   );
 
+  const searchText = useSelector((state: RootState) => state.search.searchText);
+
   const searchPokemonByName = (text: string) => {
+    dispatch(updateSearchText(text.toLowerCase()));
     const filteredNames = pokemons?.results
       .filter((item) => item.name.toLowerCase().includes(text.toLowerCase()))
       .map((item) => {
@@ -79,6 +83,7 @@ export const useSearchArea = () => {
   return {
     searchPokemonByName,
     filterPokemonByType,
-    pokemonTypes: data?.results.map((item) => item.name)
+    pokemonTypes: data?.results.map((item) => item.name),
+    searchText
   };
 };
