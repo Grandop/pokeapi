@@ -32,7 +32,6 @@ export const useSearchArea = () => {
   const filteredNames = useSelector(
     (state: RootState) => state.search.filteredNames
   );
-
   const searchText = useSelector((state: RootState) => state.search.searchText);
 
   const searchPokemonByName = (text: string) => {

@@ -8,5 +8,7 @@ module.exports = {
   extensionsToTreatAsEsm: [".ts", ".tsx"],
   transform: {
     "^.+\\.tsx?$": ["ts-jest", { useESM: true }]
-  }
+  },
+  collectCoverage: true,
+  coverageReporters: ["lcov"]
 };

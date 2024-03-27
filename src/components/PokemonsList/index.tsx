@@ -20,9 +20,6 @@ export const PokemonsList = () => {
     disableNextPageButton
   } = usePokemonList();
 
-  console.log(Math.ceil(typedPokemons.length / 20));
-  console.log(page);
-
   return (
     <>
       <S.Container>
