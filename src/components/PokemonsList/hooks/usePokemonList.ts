@@ -5,7 +5,7 @@ import { previousPage, nextPage } from "../../../store/slices/paginate";
 
 export const usePokemonList = () => {
   const dispatch = useDispatch();
-  const page = useSelector((state: RootState) => state.paginate.value); // remover ele do redux
+  const page = useSelector((state: RootState) => state.paginate.value);
   const { data, isLoading } = useGetPokemonsNamesQuery({
     limit: 20,
     offset: page
@@ -21,6 +21,10 @@ export const usePokemonList = () => {
   const currentPage = page / 20;
   const thereAreFilteredNames =
     filteredNames.length >= 1 && filteredNames.length < 1302;
+  const pagePerSearch = Math.ceil(typedPokemons.length / 20) - 1;
+  const numberOfPages = pagePerSearch === -1 ? LAST_PAGE : pagePerSearch;
+  const disablePreviousPageButton = page / 20 > FIRST_PAGE;
+  const disableNextPageButton = page / 20 < numberOfPages;
 
   const backPage = () => {
     dispatch(previousPage());
@@ -41,6 +45,8 @@ export const usePokemonList = () => {
     thereAreFilteredNames,
     isLoading,
     currentPage,
-    typedPokemons
+    typedPokemons,
+    disablePreviousPageButton,
+    disableNextPageButton
   };
 };

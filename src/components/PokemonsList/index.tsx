@@ -11,19 +11,22 @@ export const PokemonsList = () => {
     backPage,
     data,
     filteredNames,
-    FIRST_PAGE,
-    LAST_PAGE,
     isLoading,
     page,
     thereAreFilteredNames,
     currentPage,
-    typedPokemons
+    typedPokemons,
+    disablePreviousPageButton,
+    disableNextPageButton
   } = usePokemonList();
+
+  console.log(Math.ceil(typedPokemons.length / 20));
+  console.log(page);
 
   return (
     <>
       <S.Container>
-        {page / 20 > FIRST_PAGE ? (
+        {disablePreviousPageButton ? (
           <IconButton
             iconColor="white"
             icon={IoChevronBack}
@@ -31,7 +34,7 @@ export const PokemonsList = () => {
           />
         ) : null}
         <h2>Page: {page / 20 + 1}</h2>
-        {page / 20 < LAST_PAGE ? (
+        {disableNextPageButton ? (
           <IconButton
             iconColor="white"
             icon={IoChevronForward}
@@ -74,6 +77,7 @@ export const PokemonsList = () => {
                 name={option.name}
               />
             )))}
+        {}
       </S.PokemonsContainer>
     </>
   );

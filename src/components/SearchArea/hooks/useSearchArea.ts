@@ -14,6 +14,7 @@ import {
 import { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import { RootState } from "../../../store/config";
+import { turnBackToInitialPage } from "../../../store/slices/paginate";
 
 const ALL_POKEMONS = 100000;
 
@@ -36,6 +37,7 @@ export const useSearchArea = () => {
 
   const searchPokemonByName = (text: string) => {
     dispatch(updateSearchText(text.toLowerCase()));
+    dispatch(turnBackToInitialPage());
     const filteredNames = pokemons?.results
       .filter((item) => item.name.toLowerCase().includes(text.toLowerCase()))
       .map((item) => {

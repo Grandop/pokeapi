@@ -13,8 +13,12 @@ export const PaginateSlice = createSlice({
     },
     previousPage: (state) => {
       state.value -= 20;
+    },
+    turnBackToInitialPage: (state) => {
+      state.value = 0;
     }
   }
 });
 
-export const { nextPage, previousPage } = PaginateSlice.actions;
+export const { nextPage, previousPage, turnBackToInitialPage } =
+  PaginateSlice.actions;
